@@ -1,0 +1,4 @@
+sushmey_LLM_venv/
+.streamlit/
+app.py
+.DS_Store
