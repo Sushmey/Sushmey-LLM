@@ -116,6 +116,8 @@ def initial_retrieval_qa():
  except:
   raise
 
+qa = initial_retrieval_qa()
+
 # Show title and description.
 st.title("Get to know Sushmey!")
 st.write(
