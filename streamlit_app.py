@@ -109,7 +109,7 @@ def initial_retrieval_qa():
   db = FAISS.from_documents(documents=docs, embedding=encoder)
   retriever = db.as_retriever(search_kwargs = {"k":10})
 
-  gemini_model = GenerativeModel("gemini-2.0-flash")
+  gemini_model = GenerativeModel("gemini-flash-latest")
   llm = GeminiLLM(model=gemini_model)
   qa = RetrievalQA.from_chain_type(llm=llm, retriever=retriever)
   return qa
