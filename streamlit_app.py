@@ -1,4 +1,6 @@
 import streamlit as st
+import json
+import numpy as np
 from langchain_community.document_loaders import DirectoryLoader, TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
@@ -8,6 +10,7 @@ from langchain.chains import RetrievalQA
 from transformers import pipeline
 from langchain.llms.base import LLM
 from google.generativeai import configure, GenerativeModel
+from google.api_core.exceptions import ResourceExhausted
 from dotenv import load_dotenv
 from langchain_community.document_loaders import PyPDFLoader
 import os
@@ -25,6 +28,36 @@ from langchain_community.document_loaders import PyPDFDirectoryLoader
 # configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 configure(api_key=st.secrets["GEMINI_API_KEY"])
+
+FAQ_SIMILARITY_THRESHOLD = 0.7
+
+@st.cache_resource
+def get_encoder():
+    return HuggingFaceEmbeddings(
+        model_name="sentence-transformers/all-mpnet-base-v2",
+        encode_kwargs={"normalize_embeddings": True},
+    )
+
+@st.cache_resource
+def load_faqs():
+    with open("faqs.json") as f:
+        faqs = json.load(f)
+    encoder = get_encoder()
+    for faq in faqs:
+        faq["embeddings"] = [encoder.embed_query(q) for q in faq["questions"]]
+    return faqs
+
+def match_faq(question, faqs):
+    encoder = get_encoder()
+    q_embedding = encoder.embed_query(question)
+    best_score, best_answer = -1, None
+    for faq in faqs:
+        score = max(float(np.dot(q_embedding, e)) for e in faq["embeddings"])
+        if score > best_score:
+            best_score, best_answer = score, faq["answer"]
+    if best_score >= FAQ_SIMILARITY_THRESHOLD:
+        return best_answer
+    return None
 
 # Gemini wrapper as a LangChain-compatible LLM
 class GeminiLLM(LLM):
@@ -105,7 +138,7 @@ def initial_retrieval_qa():
    doc = text_splitter.create_documents([doc])
   docs = text_splitter.split_documents(doc)
   print(type(docs))
-  encoder =  HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
+  encoder = get_encoder()
   db = FAISS.from_documents(documents=docs, embedding=encoder)
   retriever = db.as_retriever(search_kwargs = {"k":10})
 
@@ -117,6 +150,7 @@ def initial_retrieval_qa():
   raise
 
 qa = initial_retrieval_qa()
+faqs = load_faqs()
 
 # Show title and description.
 st.title("Get to know Sushmey!")
@@ -133,9 +167,18 @@ question = st.text_area(
     max_chars=400)
 
 if question:
- answer = qa.run(question)
- # Stream the response to the app using `st.write_stream`.
- st.write(answer)
+ faq_answer = match_faq(question, faqs)
+ if faq_answer:
+  st.write(faq_answer)
+ else:
+  try:
+   answer = qa.run(question)
+   # Stream the response to the app using `st.write_stream`.
+   st.write(answer)
+  except ResourceExhausted:
+   st.warning("Gemini's free-tier rate limit was hit. Please wait a minute and try again.")
+  except Exception:
+   st.error("Something went wrong answering your question. Please try again.")
 
 
 

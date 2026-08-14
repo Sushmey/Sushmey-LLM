@@ -1,0 +1,78 @@
+[
+  {
+    "questions": [
+      "Who is Sushmey?",
+      "Who are you?",
+      "Tell me about Sushmey",
+      "Tell me about yourself",
+      "Give me a quick intro"
+    ],
+    "answer": "Sushmey Nirmal is a software engineer and Master of Science in Computer Science student at the University of Colorado, Boulder (expected May 2027), based in Boulder, CO."
+  },
+  {
+    "questions": [
+      "How can I contact Sushmey?",
+      "What is your email address?",
+      "How do I get in touch with you?",
+      "How can I reach you?",
+      "What is your email?"
+    ],
+    "answer": "You can reach Sushmey at sushmeywork@gmail.com, via LinkedIn, or through his website Sushmey.com."
+  },
+  {
+    "questions": [
+      "Where does Sushmey currently work?",
+      "What is your current job?",
+      "Where do you work right now?",
+      "What company are you interning at?"
+    ],
+    "answer": "Sushmey is currently a Master of Science in Computer Science student at the University of Colorado, Boulder (expected May 2027). He most recently worked as a Software Engineer Intern at eBay (San Jose, CA, May 2026 - August 2026), where he built an AI-powered observability platform fusing 15+ cross-platform telemetry sources into chronological user journeys. Before that, he was a Software Engineer at Wells Fargo in Hyderabad, India, and earlier interned as an SWE Intern at Barclays in Pune, India."
+  },
+  {
+    "questions": [
+      "Where did Sushmey go to school?",
+      "What school did you attend?",
+      "Where did you study?",
+      "Which university did you graduate from?",
+      "What is your education?"
+    ],
+    "answer": "Sushmey is pursuing a Master of Science in Computer Science at the University of Colorado, Boulder (expected May 2027), and holds a Bachelor of Technology in Information Technology from VJTI, Mumbai (June 2023)."
+  },
+  {
+    "questions": [
+      "What programming languages and technologies does Sushmey know?",
+      "What languages do you code in?",
+      "What are your technical skills?",
+      "What tech stack are you comfortable with?",
+      "What frameworks do you use?"
+    ],
+    "answer": "Sushmey works with Python, Java, SQL, JavaScript, TypeScript, GoLang, Scala, and C++, along with frameworks and technologies including Spark, Django, Flask, Angular, Express, NodeJS, Docker, TensorFlow, and LangChain."
+  },
+  {
+    "questions": [
+      "What work experience does Sushmey have?",
+      "Where have you worked before?",
+      "What is your work history?",
+      "What companies have you worked at?"
+    ],
+    "answer": "Sushmey has worked as a Software Engineer Intern at eBay (2026), a Software Engineer at Wells Fargo in Hyderabad, India (August 2023 - July 2025), and an SWE Intern at Barclays in Pune, India (June-August 2022)."
+  },
+  {
+    "questions": [
+      "What projects has Sushmey built?",
+      "What have you built?",
+      "Tell me about your projects",
+      "What side projects do you have?"
+    ],
+    "answer": "Sushmey has built BudgetIQ (a credit card spending insights app using Flask, GCP, and GenerativeAI), a Long-Term Semantic Memory Engine using Pinecone, a Face Blur and Object Detection Pipeline using YOLOv8, Better Call RAGs (an AI legal assistant over the Cambridge Law Corpus), HaikuBlog, and a chess engine with Alpha-Beta pruning."
+  },
+  {
+    "questions": [
+      "Has Sushmey contributed to open source?",
+      "Have you done any open source work?",
+      "Do you contribute to open source?",
+      "Any open-source projects under your belt?"
+    ],
+    "answer": "Yes, Sushmey has contributed to Zulip Terminal (improving stability and UX, September 2022 - May 2024) and PyAMG (improving Gauss-Seidel iteration accuracy, May-June 2024). He was also a Section Leader for Stanford's CodeInPlace Intro to Python course."
+  }
+]
